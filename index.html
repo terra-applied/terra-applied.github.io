@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terra — Scaled Simulation, Minimal Demonstration | Applied Intuition</title>
+<meta name="description" content="Terra series research created by Applied Intuition aims at pushing the boundary of physical AI learned in closed loop with minimal human demonstration, exploiting high-throughput, reactive simulation at scale together with efficient closed-loop reinforcement learning.">
+<meta name="theme-color" content="#006CFA">
+
+<link rel="icon" href="assets/brand/favicon.ico" sizes="32x32">
+<link rel="icon" href="assets/brand/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Terra — Scaled Simulation, Minimal Demonstration">
+<meta property="og:description" content="Terra series research created by Applied Intuition: pushing the boundary of physical AI learned in closed loop with minimal human demonstration, via reactive simulation at scale and efficient closed-loop reinforcement learning.">
+
+<script>document.documentElement.className += " js";</script>
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<!-- ===================== Header ===================== -->
+<header class="site-header">
+  <div class="header-pill">
+    <a class="brand-mark" href="#top" aria-label="Back to top">
+      <span class="brand-word">Terra Series</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="#terrazero">TerraZero</a>
+      <a href="#terratransfer">TerraTransfer</a>
+      <a href="#spacer">SPACeR</a>
+      <a href="https://www.appliedintuition.com/research" target="_blank" rel="noopener">Research ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ===================== Hero + project index ===================== -->
+<section class="hero">
+  <div class="wide">
+    <div class="hero-intro reveal">
+      <p class="eyebrow">Applied Intuition · Research</p>
+      <h1>Scaled Simulation, <span class="accent">Minimal Demonstration</span></h1>
+      <p class="lead">Terra series research created by Applied Intuition aims at pushing the boundary of physical AI learned in closed loop with minimal human demonstration. Terra series exploits high-throughput, reactive simulation at scale together with efficient closed-loop reinforcement learning to bring the generalizability and robustness of physical AI to the next level.</p>
+    </div>
+
+    <div class="series-index reveal">
+      <a class="series-card" href="#terrazero">
+        <span class="sc-name">TerraZero <span class="series-badge">Technical Report</span></span>
+        <span class="sc-tag">Developing state-of-the-art autonomous planners and simulation agents through self-play: powered by a reactive, high-throughput simulator executing millions of steps per second, alongside a procedural engine that generates an endless supply of edge cases — all at a minimal cost.</span>
+        <span class="sc-foot"><span class="sc-arrow">View →</span></span>
+      </a>
+      <a class="series-card" href="#terratransfer">
+        <span class="sc-name">TerraTransfer</span>
+        <span class="sc-tag">Teaching an E2E planner by the highly generalizable and robust planner from self-play, transferring the competence of TerraZero policy into E2E with video input without imitating human demonstration.</span>
+        <span class="sc-foot"><span class="sc-arrow">View →</span></span>
+      </a>
+      <a class="series-card" href="#spacer">
+        <span class="sc-name">SPACeR <span class="series-badge">ICLR 2026</span></span>
+        <span class="sc-tag">Human-like, reactive simulation agents via self-play anchored to a reference model — cheap, realistic traffic to train against.</span>
+        <span class="sc-foot"><span class="sc-arrow">View →</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TerraZero ===================== -->
+<section id="terrazero">
+  <div class="wide reveal">
+    <div class="spread">
+      <div class="spread-body">
+        <p class="eyebrow">TerraZero · Technical Report</p>
+        <h2>Procedural Simulation and Self-Play at Scale</h2>
+        <p class="spread-lead">A fast object-level simulator and a procedural scenario engine that treat logged data as a starting point, not a ceiling — bootstrapping real maps and logs into an effectively unlimited supply of low-cost, high-value scenarios for agents to learn from. A compute-efficient self-play recipe then learns from that stream through trial and error, without human demonstrations or imitation of logged trajectories. The resulting policies reach state-of-the-art closed-loop performance and transfer zero-shot across cities and datasets.</p>
+        <div class="series-links actions">
+          <a class="btn btn-primary" href="https://terra-applied.github.io/TerraZero/" target="_blank" rel="noopener">Project Page →</a>
+          <a class="btn" href="https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/main/paper/terrazero-technical-report.pdf" target="_blank" rel="noopener">Technical Report (PDF)</a>
+          <span class="btn btn-disabled" aria-disabled="true">arXiv (on release)</span>
+        </div>
+      </div>
+      <div class="spread-media">
+        <div class="intg-media">
+          <video class="intg-video" muted loop playsinline preload="metadata"
+                 controls controlslist="nodownload"
+                 src="https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/1bfcf49beccc7cdd57c505e4e8134f4606ad01fa/videos/render_v10/car__jam_ctrl__construction__ix6638/07_us-ma-boston__B_00467__agent.mp4"></video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TerraTransfer ===================== -->
+<section id="terratransfer">
+  <div class="wide reveal">
+    <div class="spread spread--rev">
+      <div class="spread-body">
+        <p class="eyebrow">TerraTransfer</p>
+        <h2>End-to-end learning via self-play <span class="accent">without expert demonstrations</span></h2>
+        <p class="spread-lead">TerraTransfer uses TerraZero's self-play planner as a teacher and distills its competence into an end-to-end camera policy — no human demonstrations required. It aligns the vision policy's latent space to the planner's vector representation, achieving 0.490 HD-Score on HUGSim and outperforming imitation baselines by +0.130.</p>
+        <div class="series-links actions">
+          <a class="btn btn-primary" href="https://terra-applied.github.io/TerraTransfer/" target="_blank" rel="noopener">Project Page →</a>
+          <a class="btn" href="https://arxiv.org/abs/2606.17386" target="_blank" rel="noopener">arXiv</a>
+        </div>
+      </div>
+      <div class="spread-media">
+        <div class="intg-media">
+          <video class="intg-video" muted loop playsinline preload="metadata"
+                 controls controlslist="nodownload"
+                 src="https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/main/terra-series/terratransfer.mp4"></video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SPACeR ===================== -->
+<section id="spacer">
+  <div class="wide reveal">
+    <div class="spread">
+      <div class="spread-body">
+        <p class="eyebrow">SPACeR · ICLR 2026</p>
+        <h2>Human-Like Simulation Agents via Self-Play Anchoring</h2>
+        <p class="spread-lead">SPACeR anchors TerraZero's self-play to a pretrained tokenized reference model, producing sim agents that are simultaneously human-like and reactive — low-cost, realistic traffic to train and evaluate against. The policy is ~50× smaller than tokenized baselines with 10× faster inference, and outperforms prior self-play and imitation methods on the Waymo Sim Agents Challenge.</p>
+        <div class="series-links actions">
+          <a class="btn btn-primary" href="https://terra-applied.github.io/SPACeR/" target="_blank" rel="noopener">Project Page →</a>
+          <a class="btn" href="https://arxiv.org/abs/2510.18060" target="_blank" rel="noopener">arXiv</a>
+          <a class="btn" href="https://openreview.net/forum?id=Q5H3NCy18S" target="_blank" rel="noopener">Paper</a>
+        </div>
+      </div>
+      <div class="spread-media">
+        <div class="intg-media">
+          <video class="intg-video" muted loop playsinline preload="metadata"
+                 controls controlslist="nodownload"
+                 src="https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/main/terra-series/spacer.mp4"></video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Closing band ===================== -->
+<section class="band">
+  <div class="wide reveal">
+    <p class="eyebrow">Join Us</p>
+    <h2>Building physical AI that moves the world.</h2>
+    <p class="lead">The Terra Series is developed by the research team at Applied Intuition. We are hiring researchers and engineers to push autonomy from simulation into the real world.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="https://www.appliedintuition.com/careers" target="_blank" rel="noopener">Careers at Applied Intuition</a>
+      <a class="btn" href="https://www.appliedintuition.com/research" target="_blank" rel="noopener">Research</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== Footer ===================== -->
+<footer class="site-footer">
+  <div class="wide">
+    <div class="foot-grid">
+      <div>
+        <div class="brand-mark" style="color:#fff">Terra Series</div>
+        <p style="max-width:40ch;color:#cfd3da">Empowering physical AI at the scale of simulation. A research program at Applied Intuition.</p>
+      </div>
+      <div>
+        <p style="margin:0 0 .4rem;font-weight:600">Projects</p>
+        <p style="margin:.2rem 0"><a href="#terrazero">TerraZero</a></p>
+        <p style="margin:.2rem 0"><a href="#terratransfer">TerraTransfer</a></p>
+        <p style="margin:.2rem 0"><a href="#spacer">SPACeR</a></p>
+      </div>
+      <div>
+        <p style="margin:0 0 .4rem;font-weight:600">Applied Intuition</p>
+        <p style="margin:.2rem 0"><a href="https://www.appliedintuition.com/research" target="_blank" rel="noopener">Research</a></p>
+        <p style="margin:.2rem 0"><a href="https://www.appliedintuition.com/careers" target="_blank" rel="noopener">Careers</a></p>
+        <p style="margin:.2rem 0"><a href="https://www.appliedintuition.com" target="_blank" rel="noopener">appliedintuition.com</a></p>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Applied Intuition. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+<!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "8f02b8061c284d6988665baa97f009ea"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
