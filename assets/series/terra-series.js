@@ -132,10 +132,26 @@
           t.setAttribute("aria-selected", on);
           panel.hidden = !on;
           var v = panel.querySelector("video");
-          if (!on) v.pause();
+          if (on) play(v); else v.pause();
         });
       });
     });
+
+    // Autoplay the visible tab's video while the section is on screen.
+    var current = function () { return root.querySelector(".ts-panel:not([hidden]) video"); };
+    if (!("IntersectionObserver" in window)) { play(current()); return; }
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var v = current();
+        if (e.isIntersecting) play(v); else v.pause();
+      });
+    }, { threshold: 0.25 }).observe(root);
+  }
+
+  function play(v) {
+    v.muted = true;
+    var p = v.play();
+    if (p && p.catch) p.catch(function () {});
   }
 
   // Homepage cards, using the homepage's own classes.
