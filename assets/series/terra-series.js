@@ -101,8 +101,8 @@
     }).join("");
   }
 
-  function video(p, cls) {
-    return '<video class="' + cls + '" muted loop playsinline preload="metadata" controls controlslist="nodownload" src="' +
+  function video(p, cls, autoplay) {
+    return '<video class="' + cls + '" muted loop playsinline ' + (autoplay ? "autoplay " : "") + 'preload="metadata" controls controlslist="nodownload" src="' +
       BASE + p.video + '#t=0.5"></video>';
   }
 
@@ -154,7 +154,7 @@
         '"><div class="spread-body"><p class="eyebrow">' + esc(p.name) + " · " + esc(p.badge) + "</p><h2>" + esc(p.title) +
         '</h2><p class="spread-lead">' + esc(p.description) + '</p><div class="series-links actions">' +
         links(p, "btn", "btn-primary") + '</div></div><div class="spread-media"><div class="intg-media">' +
-        video(p, "intg-video") + "</div></div></div></div></section>";
+        video(p, "intg-video", true) + "</div></div></div></div></section>";
     }).join("");
   }
 
@@ -170,6 +170,7 @@
     Array.prototype.forEach.call(document.querySelectorAll("[data-terra-series-sections]"), renderSections);
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
-  else init();
+  // Render now when loaded after the placeholders, so page scripts (e.g. lazy video playback) see the result.
+  if (document.querySelector("[data-terra-series],[data-terra-series-cards],[data-terra-series-sections]")) init();
+  else document.addEventListener("DOMContentLoaded", init);
 })();
