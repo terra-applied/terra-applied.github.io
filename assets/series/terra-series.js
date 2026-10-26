@@ -3,6 +3,7 @@
  * Project pages:  <div data-terra-series="terrazero"></div>   (tabs for every project, in series order)
  * Homepage:       <div data-terra-series-cards></div> and <div data-terra-series-sections></div>
  * Every site:     <footer class="site-footer" data-terra-series-footer></footer>
+ * Hero videos:    <video muted data-sound-toggle> gets a speaker button for sound.
  * Load with:      <script src="/assets/series/terra-series.js" defer></script>
  * All project sites are served under terra-applied.github.io, so root-relative paths resolve here.
  */
@@ -86,7 +87,11 @@
     ".ts-btn.ts-primary{background:var(--ts-blue);border-color:var(--ts-blue);color:#fff}",
     ".ts-media{aspect-ratio:16/9;border:1px solid var(--ts-line);border-radius:12px;overflow:hidden;background:#0d1117}",
     ".ts-media video{display:block;width:100%;height:100%;object-fit:contain}",
-    "@media (max-width:800px){.ts-panel{grid-template-columns:1fr}}"
+    "@media (max-width:800px){.ts-panel{grid-template-columns:1fr}}",
+    ".ts-sound-host{position:relative}",
+    ".ts-sound{position:absolute;top:12px;right:12px;z-index:3;display:flex;align-items:center;gap:.45em;padding:.45em .85em .45em .6em;border:0;border-radius:999px;background:rgba(13,17,23,.72);color:#fff;font:600 .85rem/1 system-ui,-apple-system,\"Segoe UI\",sans-serif;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}",
+    ".ts-sound:hover{background:var(--blue,#006CFA)}",
+    ".ts-sound svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}"
   ].join("\n");
 
   function esc(s) {
@@ -192,14 +197,41 @@
       '</div><p class="copyright">© 2026 Applied Intuition. All rights reserved.</p></div>';
   }
 
+  var ICON_MUTED = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m22 9-6 6M16 9l6 6"/></svg>';
+  var ICON_SOUND = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>';
+
+  // Speaker button over <video data-sound-toggle>: plays muted, sound only after a click.
+  function addSoundToggle(v) {
+    var host = v.parentElement;
+    host.classList.add("ts-sound-host");
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "ts-sound";
+    host.appendChild(btn);
+    var sync = function () {
+      var muted = v.muted || v.volume === 0;
+      btn.innerHTML = (muted ? ICON_MUTED : ICON_SOUND) + "<span>" + (muted ? "Sound on" : "Sound off") + "</span>";
+      btn.setAttribute("aria-label", muted ? "Turn sound on" : "Turn sound off");
+    };
+    btn.addEventListener("click", function () {
+      v.muted = !v.muted;
+      if (!v.muted && v.volume === 0) v.volume = 1;
+      if (!v.muted) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    });
+    v.addEventListener("volumechange", sync);
+    sync();
+  }
+
   function init() {
     var tabRoots = document.querySelectorAll("[data-terra-series]");
-    if (tabRoots.length) {
+    var soundVideos = document.querySelectorAll("video[data-sound-toggle]");
+    if (tabRoots.length || soundVideos.length) {
       var style = document.createElement("style");
       style.textContent = CSS;
       document.head.appendChild(style);
     }
     Array.prototype.forEach.call(tabRoots, renderTabs);
+    Array.prototype.forEach.call(soundVideos, addSoundToggle);
     Array.prototype.forEach.call(document.querySelectorAll("[data-terra-series-cards]"), renderCards);
     Array.prototype.forEach.call(document.querySelectorAll("[data-terra-series-sections]"), renderSections);
     Array.prototype.forEach.call(document.querySelectorAll("[data-terra-series-footer]"), renderFooter);
@@ -223,6 +255,6 @@
   }
 
   // Render now when loaded after the placeholders, so page scripts (e.g. lazy video playback) see the result.
-  if (document.querySelector("[data-terra-series],[data-terra-series-cards],[data-terra-series-sections],[data-terra-series-footer]")) init();
+  if (document.querySelector("[data-terra-series],[data-terra-series-cards],[data-terra-series-sections],[data-terra-series-footer],video[data-sound-toggle]")) init();
   else document.addEventListener("DOMContentLoaded", init);
 })();
