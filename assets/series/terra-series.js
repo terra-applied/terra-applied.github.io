@@ -184,6 +184,23 @@
     Array.prototype.forEach.call(tabRoots, renderTabs);
     Array.prototype.forEach.call(document.querySelectorAll("[data-terra-series-cards]"), renderCards);
     Array.prototype.forEach.call(document.querySelectorAll("[data-terra-series-sections]"), renderSections);
+    keepHashTarget();
+  }
+
+  // The browser jumps to #hash before rendered sections and late media settle the layout; jump again once they do.
+  function keepHashTarget() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    var jump = function () {
+      var el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "instant", block: "start" });
+    };
+    jump();
+    if (document.readyState === "complete") return;
+    var userScrolled = false;
+    var stop = function () { userScrolled = true; };
+    ["wheel", "touchstart", "keydown"].forEach(function (t) { window.addEventListener(t, stop, { once: true, passive: true }); });
+    window.addEventListener("load", function () { if (!userScrolled) jump(); });
   }
 
   // Render now when loaded after the placeholders, so page scripts (e.g. lazy video playback) see the result.
