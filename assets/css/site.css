@@ -199,3 +199,6 @@ html { scroll-padding-top: calc(var(--header-h) + var(--header-gap) + 16px); }
   .hero { padding-top: calc(var(--header-h) + var(--header-gap) + var(--space-3)); }
 }
 body.nav-open { overflow: hidden; }
+
+/* Card badges sit on their own line, left-aligned under the name. */
+.sc-name .series-badge { display: table; margin: 0.45rem 0 0; }
