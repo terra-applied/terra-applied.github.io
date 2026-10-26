@@ -171,7 +171,8 @@
 
   // Homepage sections, alternating text and media sides.
   function renderSections(root) {
-    root.innerHTML = PROJECTS.map(function (p, i) {
+    // Replace the placeholder so sections stay direct children of <main> (site CSS relies on it).
+    root.outerHTML = PROJECTS.map(function (p, i) {
       return '<section id="' + p.id + '"><div class="wide"><div class="spread' + (i % 2 ? " spread--rev" : "") +
         '"><div class="spread-body"><p class="eyebrow">' + esc(p.name) + " · " + esc(p.badge) + "</p><h2>" + esc(p.title) +
         '</h2><p class="spread-lead">' + esc(p.description) + '</p><div class="series-links actions">' +
@@ -240,7 +241,8 @@
 
   // The browser jumps to #hash before rendered sections and late media settle the layout; jump again once they do.
   function keepHashTarget() {
-    var id = decodeURIComponent(location.hash.slice(1));
+    var id;
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { return; }
     if (!id) return;
     var jump = function () {
       var el = document.getElementById(id);
@@ -250,7 +252,7 @@
     if (document.readyState === "complete") return;
     var userScrolled = false;
     var stop = function () { userScrolled = true; };
-    ["wheel", "touchstart", "keydown"].forEach(function (t) { window.addEventListener(t, stop, { once: true, passive: true }); });
+    ["wheel", "touchstart", "keydown", "pointerdown", "hashchange"].forEach(function (t) { window.addEventListener(t, stop, { once: true, passive: true }); });
     window.addEventListener("load", function () { if (!userScrolled) jump(); });
   }
 
