@@ -52,128 +52,13 @@
       <p class="lead">Terra series research created by Applied Intuition aims at pushing the boundary of physical AI learned in closed loop with minimal human demonstration. Terra series exploits high-throughput, reactive simulation at scale together with efficient closed-loop reinforcement learning to bring the generalizability and robustness of physical AI to the next level.</p>
     </div>
 
-    <div class="series-index reveal">
-      <a class="series-card" href="#terrazero">
-        <span class="sc-name">TerraZero <span class="series-badge">Technical Report</span></span>
-        <span class="sc-tag">Developing state-of-the-art autonomous planners and simulation agents through self-play: powered by a reactive, high-throughput simulator executing millions of steps per second, alongside a procedural engine that generates an endless supply of edge cases — all at a minimal cost.</span>
-        <span class="sc-foot"><span class="sc-arrow">View →</span></span>
-      </a>
-      <a class="series-card" href="#terratransfer">
-        <span class="sc-name">TerraTransfer <span class="series-badge">Technical Report</span></span>
-        <span class="sc-tag">Teaching an E2E planner by the highly generalizable and robust planner from self-play, transferring the competence of TerraZero policy into E2E with video input without imitating human demonstration.</span>
-        <span class="sc-foot"><span class="sc-arrow">View →</span></span>
-      </a>
-      <a class="series-card" href="#terratransfer-pp">
-        <span class="sc-name">TerraTransfer++ <span class="series-badge">Technical Report</span></span>
-        <span class="sc-tag">Scaling TerraTransfer to an end-to-end planner with zero human demonstrations, setting state-of-the-art results on HUGSim, NAVSIM navtest and navhard.</span>
-        <span class="sc-foot"><span class="sc-arrow">View →</span></span>
-      </a>
-      <a class="series-card" href="#spacer">
-        <span class="sc-name">SPACeR <span class="series-badge">ICLR 2026</span></span>
-        <span class="sc-tag">Human-like, reactive simulation agents via self-play anchored to a reference model — cheap, realistic traffic to train against.</span>
-        <span class="sc-foot"><span class="sc-arrow">View →</span></span>
-      </a>
-    </div>
+    <div class="series-index reveal" data-terra-series-cards></div>
   </div>
 </section>
 
-<!-- ===================== TerraZero ===================== -->
-<section id="terrazero">
-  <div class="wide reveal">
-    <div class="spread">
-      <div class="spread-body">
-        <p class="eyebrow">TerraZero · Technical Report</p>
-        <h2>Procedural Simulation and Self-Play at Scale</h2>
-        <p class="spread-lead">A fast object-level simulator and a procedural scenario engine that treat logged data as a starting point, not a ceiling — bootstrapping real maps and logs into an effectively unlimited supply of low-cost, high-value scenarios for agents to learn from. A compute-efficient self-play recipe then learns from that stream through trial and error, without human demonstrations or imitation of logged trajectories. The resulting policies reach state-of-the-art closed-loop performance and transfer zero-shot across cities and datasets.</p>
-        <div class="series-links actions">
-          <a class="btn btn-primary" href="https://terra-applied.github.io/TerraZero/" target="_blank" rel="noopener">Project Page →</a>
-          <a class="btn" href="https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/main/paper/terrazero-technical-report.pdf" target="_blank" rel="noopener">Technical Report (PDF)</a>
-          <a class="btn" href="https://arxiv.org/abs/2607.13028" target="_blank" rel="noopener">arXiv</a>
-        </div>
-      </div>
-      <div class="spread-media">
-        <div class="intg-media">
-          <video class="intg-video" muted loop playsinline preload="metadata"
-                 controls controlslist="nodownload"
-                 src="https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/1bfcf49beccc7cdd57c505e4e8134f4606ad01fa/videos/render_v10/car__jam_ctrl__construction__ix6638/07_us-ma-boston__B_00467__agent.mp4"></video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== TerraTransfer ===================== -->
-<section id="terratransfer">
-  <div class="wide reveal">
-    <div class="spread spread--rev">
-      <div class="spread-body">
-        <p class="eyebrow">TerraTransfer · Technical Report</p>
-        <h2>End-to-end learning via self-play <span class="accent">without expert demonstrations</span></h2>
-        <p class="spread-lead">TerraTransfer uses TerraZero's self-play planner as a teacher and distills its competence into an end-to-end camera policy — no human demonstrations required. It aligns the vision policy's latent space to the planner's vector representation, achieving 0.490 HD-Score on HUGSim and outperforming imitation baselines by +0.130.</p>
-        <div class="series-links actions">
-          <a class="btn btn-primary" href="https://terra-applied.github.io/TerraTransfer/" target="_blank" rel="noopener">Project Page →</a>
-          <a class="btn" href="https://arxiv.org/abs/2606.17386" target="_blank" rel="noopener">arXiv</a>
-        </div>
-      </div>
-      <div class="spread-media">
-        <div class="intg-media">
-          <video class="intg-video" muted loop playsinline preload="metadata"
-                 controls controlslist="nodownload"
-                 src="https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/main/terra-series/terratransfer.mp4"></video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== TerraTransfer++ ===================== -->
-<section id="terratransfer-pp">
-  <div class="wide reveal">
-    <div class="spread">
-      <div class="spread-body">
-        <p class="eyebrow">TerraTransfer++ · Technical Report</p>
-        <h2>Demonstration-free <span class="accent">end-to-end planner</span></h2>
-        <p class="spread-lead">TerraTransfer++ scales TerraTransfer: the same self-play pretraining also yields an end-to-end planner. With zero human demonstrations, its camera-only policies set state-of-the-art results on HUGSim, NAVSIM navtest and navhard.</p>
-        <div class="series-links actions">
-          <a class="btn btn-primary" href="https://terra-applied.github.io/TerraTransferPlusPlus/" target="_blank" rel="noopener">Project Page →</a>
-          <a class="btn" href="https://arxiv.org/abs/2610.30319" target="_blank" rel="noopener">arXiv</a>
-        </div>
-      </div>
-      <div class="spread-media">
-        <div class="intg-media">
-          <video class="intg-video" muted loop playsinline preload="metadata"
-                 controls controlslist="nodownload"
-                 src="https://terra-applied.github.io/TerraTransfer/assets/videos/terratransfer-pp-tour.mp4"></video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== SPACeR ===================== -->
-<section id="spacer">
-  <div class="wide reveal">
-    <div class="spread spread--rev">
-      <div class="spread-body">
-        <p class="eyebrow">SPACeR · ICLR 2026</p>
-        <h2>Human-Like Simulation Agents via Self-Play Anchoring</h2>
-        <p class="spread-lead">SPACeR anchors TerraZero's self-play to a pretrained tokenized reference model, producing sim agents that are simultaneously human-like and reactive — low-cost, realistic traffic to train and evaluate against. The policy is ~50× smaller than tokenized baselines with 10× faster inference, and outperforms prior self-play and imitation methods on the Waymo Sim Agents Challenge.</p>
-        <div class="series-links actions">
-          <a class="btn btn-primary" href="https://terra-applied.github.io/SPACeR/" target="_blank" rel="noopener">Project Page →</a>
-          <a class="btn" href="https://arxiv.org/abs/2510.18060" target="_blank" rel="noopener">arXiv</a>
-          <a class="btn" href="https://openreview.net/forum?id=Q5H3NCy18S" target="_blank" rel="noopener">Paper</a>
-        </div>
-      </div>
-      <div class="spread-media">
-        <div class="intg-media">
-          <video class="intg-video" muted loop playsinline preload="metadata"
-                 controls controlslist="nodownload"
-                 src="https://huggingface.co/datasets/woo-who/terrazero-assets/resolve/main/terra-series/spacer.mp4"></video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- ===================== Projects (rendered from assets/series/terra-series.js) ===================== -->
+<div data-terra-series-sections></div>
+<noscript><section><div class="wide"><p>Enable JavaScript to browse the Terra Series.</p></div></section></noscript>
 
 <!-- ===================== Closing band ===================== -->
 <section class="band">
@@ -216,6 +101,7 @@
   </div>
 </footer>
 
+<script src="/assets/series/terra-series.js"></script>
 <script src="assets/js/main.js" defer></script>
 <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "8f02b8061c284d6988665baa97f009ea"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
