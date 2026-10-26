@@ -2,6 +2,7 @@
  *
  * Project pages:  <div data-terra-series="terrazero"></div>   (tabs for every project, in series order)
  * Homepage:       <div data-terra-series-cards></div> and <div data-terra-series-sections></div>
+ * Every site:     <footer class="site-footer" data-terra-series-footer></footer>
  * Load with:      <script src="/assets/series/terra-series.js" defer></script>
  * All project sites are served under terra-applied.github.io, so root-relative paths resolve here.
  */
@@ -174,6 +175,23 @@
     }).join("");
   }
 
+  // Footer shared by every Terra site, using the sites' common footer classes.
+  function renderFooter(root) {
+    var row = function (label, href, ext) {
+      return '<p style="margin:.2rem 0"><a href="' + href + '"' + (ext ? ' target="_blank" rel="noopener"' : "") + ">" + esc(label) + "</a></p>";
+    };
+    root.innerHTML = '<div class="wide"><div class="foot-grid"><div>' +
+      '<a class="brand-mark" style="color:#fff;height:auto" href="https://terra-applied.github.io/">Terra Series</a>' +
+      '<p style="max-width:40ch;color:#cfd3da">Empowering physical AI at the scale of simulation. A research program at Applied Intuition.</p></div>' +
+      '<div><p style="margin:0 0 .4rem;font-weight:600">Projects</p>' +
+      PROJECTS.map(function (p) { return row(p.name, p.links[0][1]); }).join("") + "</div>" +
+      '<div><p style="margin:0 0 .4rem;font-weight:600">Applied Intuition</p>' +
+      row("Research", "https://www.appliedintuition.com/research", true) +
+      row("Careers", "https://www.appliedintuition.com/careers", true) +
+      row("appliedintuition.com", "https://www.appliedintuition.com", true) + "</div>" +
+      '</div><p class="copyright">© 2026 Applied Intuition. All rights reserved.</p></div>';
+  }
+
   function init() {
     var tabRoots = document.querySelectorAll("[data-terra-series]");
     if (tabRoots.length) {
@@ -184,6 +202,7 @@
     Array.prototype.forEach.call(tabRoots, renderTabs);
     Array.prototype.forEach.call(document.querySelectorAll("[data-terra-series-cards]"), renderCards);
     Array.prototype.forEach.call(document.querySelectorAll("[data-terra-series-sections]"), renderSections);
+    Array.prototype.forEach.call(document.querySelectorAll("[data-terra-series-footer]"), renderFooter);
     keepHashTarget();
   }
 
@@ -204,6 +223,6 @@
   }
 
   // Render now when loaded after the placeholders, so page scripts (e.g. lazy video playback) see the result.
-  if (document.querySelector("[data-terra-series],[data-terra-series-cards],[data-terra-series-sections]")) init();
+  if (document.querySelector("[data-terra-series],[data-terra-series-cards],[data-terra-series-sections],[data-terra-series-footer]")) init();
   else document.addEventListener("DOMContentLoaded", init);
 })();
