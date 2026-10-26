@@ -1,6 +1,6 @@
 /* Terra Series: one shared definition of every project, rendered on every Terra site.
  *
- * Project pages:  <div data-terra-series="terrazero"></div>   (tabs for every other project)
+ * Project pages:  <div data-terra-series="terrazero"></div>   (tabs for every project, in series order)
  * Homepage:       <div data-terra-series-cards></div> and <div data-terra-series-sections></div>
  * Load with:      <script src="/assets/series/terra-series.js" defer></script>
  * All project sites are served under terra-applied.github.io, so root-relative paths resolve here.
@@ -106,16 +106,16 @@
       BASE + p.video + '#t=0.5"></video>';
   }
 
-  // Tabs for every project except the current one; videos play only on the visible tab.
+  // Tabs for every project in the fixed series order; videos play only on the visible tab.
   function renderTabs(root) {
-    var others = PROJECTS.filter(function (p) { return p.id !== root.getAttribute("data-terra-series"); });
+    var projects = PROJECTS;
     var html = '<div class="ts"><div class="ts-tabs" role="tablist" aria-label="Terra Series projects">';
-    others.forEach(function (p, i) {
+    projects.forEach(function (p, i) {
       html += '<button type="button" class="ts-tab" role="tab" id="ts-tab-' + p.id + '" aria-controls="ts-panel-' + p.id +
         '" aria-selected="' + (i === 0) + '">' + esc(p.name) + "</button>";
     });
     html += "</div>";
-    others.forEach(function (p, i) {
+    projects.forEach(function (p, i) {
       html += '<div class="ts-panel" role="tabpanel" id="ts-panel-' + p.id + '" aria-labelledby="ts-tab-' + p.id + '"' +
         (i === 0 ? "" : " hidden") + '><div><div class="ts-head"><h3>' + esc(p.title) + '</h3><span class="ts-badge">' +
         esc(p.badge) + "</span></div><p>" + esc(p.description) + '</p><div class="ts-links">' + links(p, "ts-btn", "ts-primary") +
