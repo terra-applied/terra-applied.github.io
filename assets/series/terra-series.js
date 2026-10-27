@@ -88,6 +88,7 @@
     ".ts-media{aspect-ratio:16/9;border:1px solid var(--ts-line);border-radius:12px;overflow:hidden;background:#0d1117}",
     ".ts-media video{display:block;width:100%;height:100%;object-fit:contain}",
     "@media (max-width:800px){.ts-panel{grid-template-columns:1fr}}",
+    "@media (max-width:600px){.ts-tabs{display:grid;grid-template-columns:1fr 1fr;width:100%;border-radius:16px}.ts-tab{width:100%;padding:.6em .4em;border-radius:12px;text-align:center}}",
     ".ts-sound-host{position:relative}",
     ".ts-sound{position:absolute;top:12px;right:12px;z-index:3;display:flex;align-items:center;gap:.45em;padding:.45em .85em .45em .6em;border:0;border-radius:999px;background:rgba(13,17,23,.72);color:#fff;font:600 .85rem/1 system-ui,-apple-system,\"Segoe UI\",sans-serif;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}",
     ".ts-sound:hover{background:var(--blue,#006CFA)}",
